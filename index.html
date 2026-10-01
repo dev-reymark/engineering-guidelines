@@ -138,20 +138,8 @@
     .brand-link {
       display: flex;
       align-items: center;
-      gap: 10px;
       text-decoration: none;
       color: var(--text);
-    }
-    .brand-logo {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: linear-gradient(135deg, #2563eb, #4f46e5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.25);
     }
     .brand-title {
       font-weight: 700;
@@ -307,11 +295,21 @@
       border: none;
       color: var(--text-subtle);
       cursor: pointer;
-      font-size: 14px;
       display: none;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      padding: 0;
+      border-radius: 4px;
+      transition: color 0.15s ease, background-color 0.15s ease;
+    }
+    .sidebar-filter-clear:hover {
+      color: var(--text);
+      background: var(--bg-hover);
     }
     .sidebar-filter-clear.visible {
-      display: block;
+      display: flex;
     }
 
     .sidebar-group {
@@ -1105,13 +1103,6 @@
       </button>
 
       <a href="#/README.md" class="brand-link">
-        <div class="brand-logo">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-            <polyline points="2 17 12 22 22 17"></polyline>
-            <polyline points="2 12 12 17 22 12"></polyline>
-          </svg>
-        </div>
         <span class="brand-title">Engineering Guidelines</span>
       </a>
       <span class="version-badge">v1.1</span>
@@ -1173,7 +1164,12 @@
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-filter-wrapper">
         <input type="text" class="sidebar-filter-input" id="sidebar-filter" placeholder="Filter documentation..." aria-label="Filter documentation">
-        <button class="sidebar-filter-clear" id="filter-clear" title="Clear filter">✕</button>
+        <button class="sidebar-filter-clear" id="filter-clear" title="Clear filter" aria-label="Clear filter">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
       </div>
       <nav id="nav-container"></nav>
     </aside>

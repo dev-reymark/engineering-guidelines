@@ -9,27 +9,27 @@ This standard provides a rigorous, traceable, and production-tested framework fo
 
 ---
 
-## 🧭 Quick Navigation
+## Quick Navigation
 
 Choose a starting track below to explore the guidelines:
 
 | Track | Description | Key Documents |
 | :--- | :--- | :--- |
-| **🚀 Start Here** | Core standard and AI agent instructions | [Engineering Standard](docs/ENGINEERING-STANDARD.md) · [AI Agent Rules](AGENTS.md) · [Traceability](docs/TRACEABILITY.md) |
-| **📐 Architecture & Design** | System design, data models, and security | [Architecture](docs/architecture/ARCHITECTURE.md) · [Data Model](docs/architecture/DATA-MODEL.md) · [Security Model](docs/architecture/SECURITY.md) |
-| **🤖 Agent Rules & Workflows** | Curated guidelines for AI coding agents | [Coding Rules](.agents/rules/coding.md) · [Security Rules](.agents/rules/security.md) · [Workflows](.agents/workflows/implement-phase.md) |
-| **⚖️ Compliance & Governance** | Regulatory controls, ADRs, and audits | [Compliance Matrix](docs/compliance/COMPLIANCE-MATRIX.md) · [ADRs](docs/decisions/README.md) · [Findings](docs/findings/FINDINGS.md) |
-| **🧪 Testing & Operations** | Test matrices, deployment, and runbooks | [Test Strategy](docs/testing/TEST-STRATEGY.md) · [Deployment](docs/operations/DEPLOYMENT.md) · [Runbook](docs/operations/RUNBOOK.md) |
-| **🎨 Design & User Docs** | UI/UX systems and end-user documentation | [Design System](docs/design/DESIGN-SYSTEM.md) · [User Guide](docs/user-docs/USER-GUIDE.md) · [Admin Guide](docs/user-docs/ADMIN-GUIDE.md) |
+| **Start Here** | Core standard and AI agent instructions | [Engineering Standard](docs/ENGINEERING-STANDARD.md) · [AI Agent Rules](AGENTS.md) · [Traceability](docs/TRACEABILITY.md) |
+| **Architecture & Design** | System design, data models, and security | [Architecture](docs/architecture/ARCHITECTURE.md) · [Data Model](docs/architecture/DATA-MODEL.md) · [Security Model](docs/architecture/SECURITY.md) |
+| **Agent Rules & Workflows** | Curated guidelines for AI coding agents | [Coding Rules](.agents/rules/coding.md) · [Security Rules](.agents/rules/security.md) · [Workflows](.agents/workflows/implement-phase.md) |
+| **Compliance & Governance** | Regulatory controls, ADRs, and audits | [Compliance Matrix](docs/compliance/COMPLIANCE-MATRIX.md) · [ADRs](docs/decisions/README.md) · [Findings](docs/findings/FINDINGS.md) |
+| **Testing & Operations** | Test matrices, deployment, and runbooks | [Test Strategy](docs/testing/TEST-STRATEGY.md) · [Deployment](docs/operations/DEPLOYMENT.md) · [Runbook](docs/operations/RUNBOOK.md) |
+| **Design & User Docs** | UI/UX systems and end-user documentation | [Design System](docs/design/DESIGN-SYSTEM.md) · [User Guide](docs/user-docs/USER-GUIDE.md) · [Admin Guide](docs/user-docs/ADMIN-GUIDE.md) |
 
 ---
 
-## 🎯 The Traceability Standard
+## The Traceability Standard
 
 Every non-trivial engineering initiative or automated AI agent task follows the strict **Traceability Chain**:
 
 ```text
-Requirement ➔ Research ➔ Finding ➔ Decision (ADR) ➔ Prompt ➔ Implementation ➔ Test ➔ Result
+Requirement -> Research -> Finding -> Decision (ADR) -> Prompt -> Implementation -> Test -> Result
 ```
 
 1. **Requirement**: What the system must achieve ([`docs/project/REQUIREMENTS.md`](docs/project/REQUIREMENTS.md)).
@@ -43,7 +43,7 @@ Requirement ➔ Research ➔ Finding ➔ Decision (ADR) ➔ Prompt ➔ Implement
 
 ---
 
-## ⚡ Core Engineering Priorities
+## Core Engineering Priorities
 
 The standard defines 10 unwavering priorities in order of precedence:
 
@@ -63,7 +63,7 @@ The standard defines 10 unwavering priorities in order of precedence:
 
 ---
 
-## 📂 Repository Scaffold Structure
+## Repository Scaffold Structure
 
 The documentation site provides direct access to every file in the standard:
 
@@ -92,7 +92,7 @@ content/
 
 ---
 
-## 🛠️ How to Use This in Your Own Projects
+## How to Use This in Your Own Projects
 
 To adopt these guidelines in your software project:
 
