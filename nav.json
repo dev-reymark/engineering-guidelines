@@ -1,0 +1,379 @@
+[
+  {
+    "group": "Start Here",
+    "items": [
+      {
+        "path": "AGENTS.md",
+        "title": "AI Agent Instructions"
+      },
+      {
+        "path": "docs/ENGINEERING-STANDARD.md",
+        "title": "Software Project Engineering & AI-Agent Development Standard"
+      },
+      {
+        "path": "docs/TRACEABILITY.md",
+        "title": "Project Traceability"
+      }
+    ]
+  },
+  {
+    "group": "Project",
+    "items": [
+      {
+        "path": "docs/project/DOMAIN.md",
+        "title": "Domain Model"
+      },
+      {
+        "path": "docs/project/PROJECT.md",
+        "title": "Project Definition"
+      },
+      {
+        "path": "docs/project/REQUIREMENTS.md",
+        "title": "Requirements"
+      },
+      {
+        "path": "docs/project/ROADMAP.md",
+        "title": "Project Roadmap"
+      }
+    ]
+  },
+  {
+    "group": "Architecture",
+    "items": [
+      {
+        "path": "docs/architecture/ARCHITECTURE.md",
+        "title": "Architecture"
+      },
+      {
+        "path": "docs/architecture/AUDIT-TEMPLATE.md",
+        "title": "Audit \u2014 Title"
+      },
+      {
+        "path": "docs/architecture/AUDIT.md",
+        "title": "Architecture Audit"
+      },
+      {
+        "path": "docs/architecture/DATA-MODEL.md",
+        "title": "Data Model"
+      },
+      {
+        "path": "docs/architecture/SECURITY.md",
+        "title": "Security Model"
+      }
+    ]
+  },
+  {
+    "group": "Design & UX",
+    "items": [
+      {
+        "path": "docs/design/ACCESSIBILITY.md",
+        "title": "Accessibility Standard"
+      },
+      {
+        "path": "docs/design/DESIGN-SYSTEM.md",
+        "title": "Design System"
+      },
+      {
+        "path": "docs/design/README.md",
+        "title": "Design Documentation"
+      },
+      {
+        "path": "docs/design/RESPONSIVE-DESIGN.md",
+        "title": "Responsive Design Standard"
+      },
+      {
+        "path": "docs/design/UI-GUIDELINES.md",
+        "title": "UI Guidelines"
+      },
+      {
+        "path": "docs/design/UX-GUIDELINES.md",
+        "title": "UX Guidelines"
+      }
+    ]
+  },
+  {
+    "group": "User & Training",
+    "items": [
+      {
+        "path": "docs/user-docs/ADMIN-GUIDE.md",
+        "title": "Administrator Guide"
+      },
+      {
+        "path": "docs/user-docs/FAQ.md",
+        "title": "Frequently Asked Questions"
+      },
+      {
+        "path": "docs/user-docs/ONBOARDING.md",
+        "title": "Onboarding Guide"
+      },
+      {
+        "path": "docs/user-docs/README.md",
+        "title": "User Documentation"
+      },
+      {
+        "path": "docs/user-docs/TRAINING-GUIDE.md",
+        "title": "Training Guide"
+      },
+      {
+        "path": "docs/user-docs/TROUBLESHOOTING.md",
+        "title": "Troubleshooting Guide"
+      },
+      {
+        "path": "docs/user-docs/USER-GUIDE.md",
+        "title": "User Guide"
+      }
+    ]
+  },
+  {
+    "group": "Developer",
+    "items": [
+      {
+        "path": "docs/developer/CONTRIBUTING.md",
+        "title": "Contributing"
+      },
+      {
+        "path": "docs/developer/GETTING-STARTED.md",
+        "title": "Developer Getting Started"
+      },
+      {
+        "path": "docs/developer/LOCAL-DEVELOPMENT.md",
+        "title": "Local Development"
+      },
+      {
+        "path": "docs/developer/README.md",
+        "title": "Developer Documentation"
+      }
+    ]
+  },
+  {
+    "group": "Testing",
+    "items": [
+      {
+        "path": "docs/testing/TEST-MATRIX.md",
+        "title": "Test Matrix"
+      },
+      {
+        "path": "docs/testing/TEST-STRATEGY.md",
+        "title": "Test Strategy"
+      }
+    ]
+  },
+  {
+    "group": "Operations",
+    "items": [
+      {
+        "path": "docs/operations/BACKUP-RECOVERY.md",
+        "title": "Backup & Recovery"
+      },
+      {
+        "path": "docs/operations/DEPLOYMENT.md",
+        "title": "Deployment"
+      },
+      {
+        "path": "docs/operations/ENVIRONMENT.md",
+        "title": "Environment & Configuration"
+      },
+      {
+        "path": "docs/operations/RUNBOOK.md",
+        "title": "Operations Runbook"
+      }
+    ]
+  },
+  {
+    "group": "Findings",
+    "items": [
+      {
+        "path": "docs/findings/FINDING-TEMPLATE.md",
+        "title": "[AREA]-NNN \u2014 Finding Title"
+      },
+      {
+        "path": "docs/findings/FINDINGS.md",
+        "title": "Findings Registry"
+      },
+      {
+        "path": "docs/findings/README.md",
+        "title": "Findings"
+      }
+    ]
+  },
+  {
+    "group": "Decisions",
+    "items": [
+      {
+        "path": "docs/decisions/ADR-TEMPLATE.md",
+        "title": "ADR-XXX \u2014 [Decision]"
+      },
+      {
+        "path": "docs/decisions/README.md",
+        "title": "Architecture / Compliance Decision Records"
+      }
+    ]
+  },
+  {
+    "group": "Prompts",
+    "items": [
+      {
+        "path": "docs/prompts/000-project-discovery.md",
+        "title": "Prompt 000 \u2014 Project Discovery"
+      },
+      {
+        "path": "docs/prompts/README.md",
+        "title": "Prompt & Execution Registry"
+      },
+      {
+        "path": "docs/prompts/templates/AUDIT-PROMPT.md",
+        "title": "Prompt XXX \u2014 [Audit Name]"
+      },
+      {
+        "path": "docs/prompts/templates/IMPLEMENTATION-PROMPT.md",
+        "title": "Prompt XXX \u2014 [Implementation Phase]"
+      },
+      {
+        "path": "docs/prompts/templates/REMEDIATION-PROMPT.md",
+        "title": "Prompt XXX \u2014 [Remediation Phase]"
+      },
+      {
+        "path": "docs/prompts/templates/RESEARCH-PROMPT.md",
+        "title": "Prompt XXX \u2014 [Research Topic]"
+      }
+    ]
+  },
+  {
+    "group": "Results",
+    "items": [
+      {
+        "path": "docs/results/PHASE-RESULT-TEMPLATE.md",
+        "title": "PHASE-XXX Results \u2014 Title"
+      },
+      {
+        "path": "docs/results/README.md",
+        "title": "Phase Results Registry"
+      }
+    ]
+  },
+  {
+    "group": "Compliance",
+    "items": [
+      {
+        "path": "docs/compliance/COMPLIANCE-MATRIX.md",
+        "title": "Compliance Matrix"
+      },
+      {
+        "path": "docs/compliance/COMPLIANCE-ROADMAP.md",
+        "title": "Compliance Roadmap"
+      },
+      {
+        "path": "docs/compliance/README.md",
+        "title": "Compliance Documentation"
+      },
+      {
+        "path": "docs/compliance/SOURCES.md",
+        "title": "Compliance Sources"
+      }
+    ]
+  },
+  {
+    "group": "Agent Rules",
+    "items": [
+      {
+        "path": ".agents/rules/architecture.md",
+        "title": "Architecture Rules"
+      },
+      {
+        "path": ".agents/rules/coding.md",
+        "title": "Coding Rules"
+      },
+      {
+        "path": ".agents/rules/database.md",
+        "title": "Database Rules"
+      },
+      {
+        "path": ".agents/rules/documentation.md",
+        "title": "Documentation Rules"
+      },
+      {
+        "path": ".agents/rules/security.md",
+        "title": "Security Rules"
+      },
+      {
+        "path": ".agents/rules/testing.md",
+        "title": "Testing Rules"
+      },
+      {
+        "path": ".agents/rules/ui-design.md",
+        "title": "UI / Design-System Rules"
+      },
+      {
+        "path": ".agents/rules/user-documentation.md",
+        "title": "User Documentation Rule"
+      }
+    ]
+  },
+  {
+    "group": "Agent Workflows",
+    "items": [
+      {
+        "path": ".agents/workflows/audit.md",
+        "title": "Workflow \u2014 Audit"
+      },
+      {
+        "path": ".agents/workflows/bug-fix.md",
+        "title": "Workflow \u2014 Bug Fix"
+      },
+      {
+        "path": ".agents/workflows/database-migration.md",
+        "title": "Workflow \u2014 Database Migration"
+      },
+      {
+        "path": ".agents/workflows/implement-phase.md",
+        "title": "Workflow \u2014 Implement Phase"
+      },
+      {
+        "path": ".agents/workflows/new-project.md",
+        "title": "Workflow \u2014 New Project"
+      },
+      {
+        "path": ".agents/workflows/production-readiness.md",
+        "title": "Workflow \u2014 Production Readiness"
+      },
+      {
+        "path": ".agents/workflows/security-review.md",
+        "title": "Workflow \u2014 Security Review"
+      },
+      {
+        "path": ".agents/workflows/ui-feature.md",
+        "title": "Workflow \u2014 UI Feature"
+      },
+      {
+        "path": ".agents/workflows/user-documentation.md",
+        "title": "User Documentation Workflow"
+      }
+    ]
+  },
+  {
+    "group": "Agent Reference",
+    "items": [
+      {
+        "path": ".agents/README.md",
+        "title": ".agents"
+      },
+      {
+        "path": ".agents/skills/README.md",
+        "title": "Skills"
+      }
+    ]
+  },
+  {
+    "group": "Other",
+    "items": [
+      {
+        "path": "CHANGELOG.md",
+        "title": "Changelog"
+      },
+      {
+        "path": "docs/README.md",
+        "title": "Project Documentation"
+      }
+    ]
+  }
+]
