@@ -1,14 +1,18 @@
 [
   {
-    "group": "Start Here",
+    "group": "Overview",
     "items": [
       {
-        "path": "AGENTS.md",
-        "title": "AI Agent Instructions"
+        "path": "README.md",
+        "title": "Overview & Getting Started"
       },
       {
         "path": "docs/ENGINEERING-STANDARD.md",
-        "title": "Software Project Engineering & AI-Agent Development Standard"
+        "title": "Engineering Standard v1.1"
+      },
+      {
+        "path": "AGENTS.md",
+        "title": "AI Agent Instructions"
       },
       {
         "path": "docs/TRACEABILITY.md",

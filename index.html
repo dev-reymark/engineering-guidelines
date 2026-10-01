@@ -1,71 +1,1942 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Software Project Engineering & AI-Agent Development Guidelines">
-  <title>Engineering Guidelines</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Software Project Engineering & AI-Agent Development Standard v1.1 — Browsable documentation and engineering scaffold for mission-critical software.">
+  <title>Engineering Guidelines · Standard v1.1</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css">
+  
   <style>
-    :root { color-scheme: light dark; --bg:#fff; --panel:#f7f7f8; --text:#18181b; --muted:#6b7280; --border:#e5e7eb; --accent:#2563eb; --code:#f3f4f6; }
-    @media (prefers-color-scheme: dark) { :root { --bg:#111113; --panel:#18181b; --text:#f4f4f5; --muted:#a1a1aa; --border:#303036; --accent:#60a5fa; --code:#202024; } }
-    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font:15px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-    a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
-    .top{height:58px;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 22px;position:sticky;top:0;background:var(--bg);z-index:10}
-    .brand{font-weight:700}.version{margin-left:10px;color:var(--muted);font-size:12px}.menu{display:none;margin-right:12px}
-    .layout{display:grid;grid-template-columns:290px minmax(0,1fr);min-height:calc(100vh - 58px)}
-    aside{border-right:1px solid var(--border);padding:18px 14px;position:sticky;top:58px;height:calc(100vh - 58px);overflow:auto;background:var(--panel)}
-    .search{width:100%;padding:9px 10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);margin-bottom:16px}
-    .group{margin:18px 6px 7px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
-    nav a{display:block;padding:6px 8px;border-radius:7px;color:var(--text);line-height:1.3} nav a.active{background:var(--code);font-weight:600}
-    main{width:min(920px,100%);padding:44px 54px 80px;margin:0 auto;overflow:hidden}
-    article h1{font-size:2.15rem;line-height:1.15;margin-top:0} article h2{margin-top:2.2em;border-bottom:1px solid var(--border);padding-bottom:.3em}
-    article h3{margin-top:1.8em} article img{max-width:100%} article table{border-collapse:collapse;width:100%;display:block;overflow:auto}
-    article th,article td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
-    article pre{background:var(--code);padding:16px;border-radius:10px;overflow:auto} article code{background:var(--code);padding:.15em .35em;border-radius:4px}
-    article pre code{padding:0;background:none} article blockquote{border-left:3px solid var(--border);margin-left:0;padding-left:16px;color:var(--muted)}
-    .loading,.error{color:var(--muted)} footer{margin-top:64px;padding-top:18px;border-top:1px solid var(--border);color:var(--muted);font-size:13px}
-    @media(max-width:800px){.menu{display:inline-block} .layout{display:block} aside{display:none;position:fixed;z-index:20;left:0;top:58px;width:88%;max-width:330px;height:calc(100vh - 58px)} aside.open{display:block} main{padding:30px 20px 60px}}
+    :root {
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      
+      /* Light Theme (Default) */
+      --bg: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-sidebar: #f8fafc;
+      --bg-hover: #f1f5f9;
+      --bg-active: #eff6ff;
+      --border: #e2e8f0;
+      --border-subtle: #edf2f7;
+      --border-focus: #3b82f6;
+      
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --text-subtle: #94a3b8;
+      
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-light: #eff6ff;
+      --accent-border: #bfdbfe;
+      --accent-text: #1d4ed8;
+      
+      --code-bg: #0f172a;
+      --code-text: #e2e8f0;
+      --code-inline-bg: #f1f5f9;
+      --code-inline-text: #0f172a;
+      --code-inline-border: #e2e8f0;
+      
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.04);
+      --shadow-modal: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+      
+      --header-height: 64px;
+      --sidebar-width: 290px;
+      --toc-width: 240px;
+    }
+
+    [data-theme="dark"] {
+      --bg: #090d16;
+      --bg-surface: #0f172a;
+      --bg-sidebar: #0b1120;
+      --bg-hover: #1e293b;
+      --bg-active: #172554;
+      --border: #1e293b;
+      --border-subtle: #162032;
+      --border-focus: #60a5fa;
+      
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-subtle: #64748b;
+      
+      --accent: #3b82f6;
+      --accent-hover: #60a5fa;
+      --accent-light: #1e293b;
+      --accent-border: #1e3a8a;
+      --accent-text: #93c5fd;
+      
+      --code-bg: #060911;
+      --code-text: #e2e8f0;
+      --code-inline-bg: #1e293b;
+      --code-inline-text: #93c5fd;
+      --code-inline-border: #334155;
+      
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4);
+      --shadow-modal: 0 20px 25px -5px rgb(0 0 0 / 0.6);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font-sans);
+      font-size: 15.5px;
+      line-height: 1.75;
+      color: var(--text);
+      background-color: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    /* Top Progress Bar */
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, #2563eb, #60a5fa);
+      z-index: 100;
+      transition: width 0.1s ease-out;
+    }
+
+    /* Header */
+    header.top-header {
+      height: var(--header-height);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+    [data-theme="dark"] header.top-header {
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .brand-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+    }
+    .brand-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.25);
+    }
+    .brand-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: -0.015em;
+    }
+    .version-badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 20px;
+      background: var(--accent-light);
+      color: var(--accent-text);
+      border: 1px solid var(--accent-border);
+      letter-spacing: 0.02em;
+    }
+
+    .header-center {
+      flex: 1;
+      max-width: 480px;
+      margin: 0 20px;
+    }
+    .search-trigger-btn {
+      width: 100%;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      font-size: 13.5px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .search-trigger-btn:hover {
+      border-color: var(--accent);
+      color: var(--text);
+      box-shadow: var(--shadow-sm);
+    }
+    .search-placeholder {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .search-kbd {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--bg-hover);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-link-btn {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 13.5px;
+      font-weight: 500;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: all 0.15s ease;
+    }
+    .nav-link-btn:hover {
+      color: var(--accent);
+      background: var(--bg-hover);
+    }
+    .icon-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--text-muted);
+      background: var(--bg-surface);
+      transition: all 0.15s ease;
+    }
+    .icon-btn:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: var(--bg-hover);
+    }
+    .mobile-menu-btn {
+      display: none;
+    }
+
+    /* Layout */
+    .app-layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) minmax(0, 1fr) var(--toc-width);
+      min-height: calc(100vh - var(--header-height));
+    }
+
+    /* Left Sidebar */
+    aside.sidebar {
+      position: sticky;
+      top: var(--header-height);
+      height: calc(100vh - var(--header-height));
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--bg-sidebar);
+      padding: 20px 16px 40px;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+    aside.sidebar::-webkit-scrollbar {
+      width: 5px;
+    }
+    aside.sidebar::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
+
+    .sidebar-filter-wrapper {
+      position: relative;
+      margin-bottom: 16px;
+    }
+    .sidebar-filter-input {
+      width: 100%;
+      height: 34px;
+      padding: 0 28px 0 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text);
+      font-size: 13px;
+      font-family: var(--font-sans);
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+    .sidebar-filter-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-light);
+    }
+    .sidebar-filter-clear {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-subtle);
+      cursor: pointer;
+      font-size: 14px;
+      display: none;
+    }
+    .sidebar-filter-clear.visible {
+      display: block;
+    }
+
+    .sidebar-group {
+      margin-bottom: 16px;
+    }
+    .group-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 8px;
+      margin-bottom: 2px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      cursor: pointer;
+      user-select: none;
+      border-radius: 4px;
+      transition: color 0.15s ease, background-color 0.15s ease;
+    }
+    .group-header:hover {
+      color: var(--text);
+      background: var(--bg-hover);
+    }
+    .group-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .group-count {
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 10px;
+      background: var(--border-subtle);
+      border: 1px solid var(--border);
+      color: var(--text-subtle);
+      font-weight: 600;
+    }
+    .group-chevron {
+      transition: transform 0.2s ease;
+    }
+    .sidebar-group.collapsed .group-chevron {
+      transform: rotate(-90deg);
+    }
+    .sidebar-group.collapsed .group-items {
+      display: none;
+    }
+
+    .nav-item-link {
+      display: flex;
+      align-items: center;
+      padding: 6px 10px 6px 12px;
+      margin: 1px 0;
+      border-radius: 6px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13.5px;
+      line-height: 1.4;
+      font-weight: 450;
+      position: relative;
+      transition: all 0.12s ease;
+    }
+    .nav-item-link:hover {
+      color: var(--text);
+      background: var(--bg-hover);
+      text-decoration: none;
+    }
+    .nav-item-link.active {
+      color: var(--accent);
+      background: var(--bg-active);
+      font-weight: 600;
+    }
+    .nav-item-link.active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 15%;
+      bottom: 15%;
+      width: 3px;
+      border-radius: 0 2px 2px 0;
+      background: var(--accent);
+    }
+
+    /* Main Content Area */
+    main.main-content {
+      padding: 36px 48px 80px;
+      min-width: 0;
+      background: var(--bg-surface);
+      transition: background-color 0.2s ease;
+    }
+    .content-container {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    /* Breadcrumbs */
+    .breadcrumbs {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .breadcrumbs a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    .breadcrumbs a:hover {
+      color: var(--accent);
+    }
+    .breadcrumb-sep {
+      color: var(--text-subtle);
+      font-size: 11px;
+    }
+    .breadcrumb-current {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* Document Meta header */
+    .doc-meta-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .doc-stats {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .doc-stat-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .doc-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .meta-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      font-size: 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .meta-action-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--bg-hover);
+    }
+
+    /* Markdown Body Typography */
+    article.markdown-body {
+      font-size: 15.5px;
+      line-height: 1.8;
+      color: var(--text);
+    }
+    article.markdown-body h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-top: 0;
+      margin-bottom: 1.25rem;
+      color: var(--text);
+    }
+    article.markdown-body h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.35;
+      margin-top: 2.75rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    article.markdown-body h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      line-height: 1.4;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+    article.markdown-body h4 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    article.markdown-body p {
+      margin-top: 0;
+      margin-bottom: 1.25rem;
+    }
+    article.markdown-body a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+    article.markdown-body a:hover {
+      color: var(--accent-hover);
+      border-bottom-color: var(--accent);
+    }
+    article.markdown-body ul, article.markdown-body ol {
+      margin-top: 0;
+      margin-bottom: 1.25rem;
+      padding-left: 1.5rem;
+    }
+    article.markdown-body li {
+      margin-bottom: 0.35rem;
+    }
+    article.markdown-body li::marker {
+      color: var(--text-muted);
+    }
+    article.markdown-body hr {
+      border: 0;
+      height: 1px;
+      background: var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* Inline Code */
+    article.markdown-body code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      background: var(--code-inline-bg);
+      color: var(--code-inline-text);
+      padding: 0.15em 0.4em;
+      border-radius: 5px;
+      border: 1px solid var(--code-inline-border);
+    }
+
+    /* Code Blocks */
+    .code-block-wrapper {
+      position: relative;
+      margin: 1.5rem 0;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--code-bg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .code-block-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      color: #94a3b8;
+    }
+    .code-lang-tag {
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+    .code-copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #cbd5e1;
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .code-copy-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+    article.markdown-body pre {
+      margin: 0;
+      padding: 16px 18px;
+      overflow-x: auto;
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+      line-height: 1.6;
+      background: transparent !important;
+    }
+    article.markdown-body pre code {
+      background: transparent !important;
+      border: none !important;
+      padding: 0 !important;
+      color: inherit;
+    }
+
+    /* Tables */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin: 1.75rem 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-surface);
+      box-shadow: var(--shadow-sm);
+    }
+    article.markdown-body table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14px;
+      margin: 0;
+    }
+    article.markdown-body th {
+      background: var(--bg-hover);
+      color: var(--text);
+      font-weight: 600;
+      padding: 11px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    article.markdown-body td {
+      padding: 11px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    article.markdown-body tr:last-child td {
+      border-bottom: none;
+    }
+    article.markdown-body tbody tr:hover {
+      background: var(--bg-hover);
+    }
+
+    /* Blockquotes & Admonitions (Callouts) */
+    article.markdown-body blockquote {
+      margin: 1.5rem 0;
+      padding: 14px 18px;
+      border-left: 4px solid var(--border);
+      background: var(--bg-hover);
+      border-radius: 0 8px 8px 0;
+      color: var(--text-muted);
+    }
+    article.markdown-body blockquote p:last-child {
+      margin-bottom: 0;
+    }
+
+    .admonition {
+      margin: 1.5rem 0;
+      padding: 16px 18px;
+      border-radius: 8px;
+      border-left: 4px solid;
+      background: var(--bg-surface);
+      box-shadow: var(--shadow-sm);
+    }
+    .admonition-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 13.5px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .admonition-content p:last-child {
+      margin-bottom: 0;
+    }
+    
+    .admonition-note {
+      border-color: #3b82f6;
+      background: rgba(59, 130, 246, 0.06);
+    }
+    .admonition-note .admonition-header { color: #2563eb; }
+    
+    .admonition-tip {
+      border-color: #10b981;
+      background: rgba(16, 185, 129, 0.06);
+    }
+    .admonition-tip .admonition-header { color: #059669; }
+    
+    .admonition-important {
+      border-color: #8b5cf6;
+      background: rgba(139, 92, 246, 0.06);
+    }
+    .admonition-important .admonition-header { color: #7c3aed; }
+    
+    .admonition-warning {
+      border-color: #f59e0b;
+      background: rgba(245, 158, 11, 0.07);
+    }
+    .admonition-warning .admonition-header { color: #d97706; }
+    
+    .admonition-caution {
+      border-color: #ef4444;
+      background: rgba(239, 68, 68, 0.07);
+    }
+    .admonition-caution .admonition-header { color: #dc2626; }
+
+    /* Heading Anchor Link */
+    .heading-anchor {
+      color: var(--text-subtle);
+      opacity: 0;
+      margin-left: 8px;
+      text-decoration: none;
+      font-weight: normal;
+      transition: opacity 0.15s ease;
+    }
+    h2:hover .heading-anchor, h3:hover .heading-anchor {
+      opacity: 1;
+    }
+
+    /* Previous / Next Pagination Cards */
+    .doc-pagination {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .pagination-card {
+      display: flex;
+      flex-direction: column;
+      padding: 14px 18px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      background: var(--bg-surface);
+      transition: all 0.15s ease;
+    }
+    .pagination-card:hover {
+      border-color: var(--accent);
+      background: var(--bg-hover);
+      box-shadow: var(--shadow-sm);
+    }
+    .pagination-card.next {
+      text-align: right;
+    }
+    .pagination-label {
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .pagination-title {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    /* Page Footer */
+    footer.doc-footer {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* Right Sidebar (TOC) */
+    aside.toc-sidebar {
+      position: sticky;
+      top: var(--header-height);
+      height: calc(100vh - var(--header-height));
+      overflow-y: auto;
+      padding: 32px 18px 40px;
+      font-size: 13px;
+      background: var(--bg);
+      border-left: 1px solid var(--border);
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+    .toc-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .toc-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .toc-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      line-height: 1.45;
+      padding: 3px 0;
+      border-left: 2px solid transparent;
+      padding-left: 10px;
+      margin-left: -2px;
+      transition: all 0.12s ease;
+    }
+    .toc-link.depth-3 {
+      padding-left: 22px;
+      font-size: 12px;
+    }
+    .toc-link:hover {
+      color: var(--text);
+    }
+    .toc-link.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      font-weight: 600;
+    }
+    .toc-footer {
+      margin-top: 28px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .toc-action-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 12px;
+      transition: color 0.15s ease;
+    }
+    .toc-action-link:hover {
+      color: var(--accent);
+    }
+
+    /* Search Modal */
+    .search-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 12vh;
+    }
+    .search-modal-backdrop.open {
+      display: flex;
+    }
+    .search-modal {
+      width: min(600px, 92vw);
+      background: var(--bg-surface);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-modal);
+      overflow: hidden;
+      animation: modalFadeIn 0.15s ease-out;
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(-10px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .modal-search-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+    }
+    .modal-search-input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      color: var(--text);
+      font-size: 16px;
+      font-family: var(--font-sans);
+      outline: none;
+    }
+    .modal-search-results {
+      max-height: 380px;
+      overflow-y: auto;
+      padding: 8px;
+    }
+    .search-result-item {
+      display: flex;
+      flex-direction: column;
+      padding: 10px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text);
+      transition: background 0.12s ease;
+    }
+    .search-result-item:hover, .search-result-item.selected {
+      background: var(--bg-active);
+    }
+    .search-result-title {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--accent);
+      margin-bottom: 2px;
+    }
+    .search-result-group {
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+    .modal-search-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      border-top: 1px solid var(--border);
+      background: var(--bg-hover);
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    /* Toast Notification */
+    .doc-toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--text);
+      color: var(--bg-surface);
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: var(--shadow-lg);
+      z-index: 300;
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: all 0.2s ease;
+    }
+    .doc-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Error / Empty State Card */
+    .doc-error-card {
+      padding: 48px 32px;
+      text-align: center;
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      background: var(--bg-hover);
+      margin: 40px 0;
+    }
+    .doc-error-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 16px;
+      color: var(--text-muted);
+    }
+    .doc-error-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 13.5px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      color: #fff;
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-surface);
+      color: var(--text);
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 13.5px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-secondary:hover {
+      background: var(--bg-hover);
+      border-color: var(--accent);
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 1160px) {
+      .app-layout {
+        grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+      }
+      aside.toc-sidebar {
+        display: none;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .app-layout {
+        display: block;
+      }
+      .mobile-menu-btn {
+        display: flex;
+      }
+      .header-center {
+        display: none;
+      }
+      aside.sidebar {
+        display: none;
+        position: fixed;
+        left: 0;
+        top: var(--header-height);
+        width: 85%;
+        max-width: 320px;
+        height: calc(100vh - var(--header-height));
+        z-index: 90;
+        box-shadow: var(--shadow-modal);
+      }
+      aside.sidebar.open {
+        display: block;
+      }
+      .sidebar-overlay {
+        position: fixed;
+        inset: 0;
+        top: var(--header-height);
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 80;
+        display: none;
+      }
+      .sidebar-overlay.open {
+        display: block;
+      }
+      main.main-content {
+        padding: 24px 20px 60px;
+      }
+      .doc-pagination {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
-<header class="top"><button class="menu" id="menu">☰</button><span class="brand">Engineering Guidelines</span><span class="version">v1.1</span></header>
-<div class="layout">
-  <aside id="sidebar"><input class="search" id="search" placeholder="Filter documentation…" aria-label="Filter documentation"><nav id="nav"></nav></aside>
-  <main><article id="content"><p class="loading">Loading documentation…</p></article><footer>Software Project Engineering & AI-Agent Development Standard · v1.1</footer></main>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
-<script>
-const navEl=document.getElementById('nav'), contentEl=document.getElementById('content'), sidebar=document.getElementById('sidebar');
-let NAV=[];
-const esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
-function current(){return decodeURIComponent(location.hash.replace(/^#\/?/,'')||'README.md')}
-function renderNav(filter=''){
-  const q=filter.toLowerCase(); let out='';
-  for(const g of NAV){
-    const its=g.items.filter(i=>!q||i.title.toLowerCase().includes(q)||i.path.toLowerCase().includes(q));
-    if(!its.length) continue;
-    out+=`<div class="group">${esc(g.group)}</div>`;
-    for(const i of its) out+=`<a data-path="${esc(i.path)}" href="#/${encodeURI(i.path)}">${esc(i.title)}</a>`;
-  }
-  navEl.innerHTML=out; highlight();
-}
-function highlight(){const p=current(); document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('active',a.dataset.path===p))}
-async function load(){
-  const p=current(); highlight(); sidebar.classList.remove('open');
-  try{
-    const r=await fetch('content/'+p); if(!r.ok) throw new Error('Document not found');
-    const md=await r.text();
-    marked.setOptions({gfm:true,breaks:false});
-    contentEl.innerHTML=DOMPurify.sanitize(marked.parse(md));
-    document.title=(contentEl.querySelector('h1')?.textContent||'Engineering Guidelines')+' · Guidelines';
-    window.scrollTo(0,0);
-  }catch(e){contentEl.innerHTML=`<h1>Document unavailable</h1><p class="error">${esc(e.message)}</p>`}
-}
-fetch('nav.json').then(r=>r.json()).then(n=>{NAV=n;renderNav();load()});
-window.addEventListener('hashchange',load);
-document.getElementById('search').addEventListener('input',e=>renderNav(e.target.value));
-document.getElementById('menu').addEventListener('click',()=>sidebar.classList.toggle('open'));
-</script>
-</body></html>
+
+  <!-- Reading Progress Bar -->
+  <div id="progress-bar"></div>
+
+  <!-- Top Header -->
+  <header class="top-header">
+    <div class="header-left">
+      <button class="icon-btn mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle navigation menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <a href="#/README.md" class="brand-link">
+        <div class="brand-logo">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <span class="brand-title">Engineering Guidelines</span>
+      </a>
+      <span class="version-badge">v1.1</span>
+    </div>
+
+    <!-- Center Search Bar -->
+    <div class="header-center">
+      <button class="search-trigger-btn" id="search-trigger">
+        <span class="search-placeholder">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          Search guidelines & rules...
+        </span>
+        <span class="search-kbd">Ctrl K</span>
+      </button>
+    </div>
+
+    <!-- Right Header Actions -->
+    <div class="header-right">
+      <a href="#/docs/ENGINEERING-STANDARD.md" class="nav-link-btn">Standard</a>
+      <a href="#/AGENTS.md" class="nav-link-btn">Agent Rules</a>
+      
+      <!-- Theme Switcher -->
+      <button class="icon-btn" id="theme-btn" title="Toggle theme (Light / Dark)" aria-label="Toggle theme">
+        <svg id="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg id="theme-icon-moon" style="display:none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+
+      <!-- GitHub Link -->
+      <a href="https://github.com/dev-reymark/engineering-guidelines" target="_blank" rel="noopener noreferrer" class="icon-btn" title="View GitHub Repository" aria-label="View on GitHub">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Overlay -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- App Layout -->
+  <div class="app-layout">
+
+    <!-- Left Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-filter-wrapper">
+        <input type="text" class="sidebar-filter-input" id="sidebar-filter" placeholder="Filter documentation..." aria-label="Filter documentation">
+        <button class="sidebar-filter-clear" id="filter-clear" title="Clear filter">✕</button>
+      </div>
+      <nav id="nav-container"></nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="content-container">
+        
+        <!-- Breadcrumbs -->
+        <nav class="breadcrumbs" id="breadcrumbs" aria-label="Breadcrumb"></nav>
+
+        <!-- Document Metadata Bar -->
+        <div class="doc-meta-bar" id="doc-meta-bar">
+          <div class="doc-stats">
+            <span class="doc-stat-item" id="reading-time">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <span>Calculating...</span>
+            </span>
+            <span class="doc-stat-item" id="word-count"></span>
+          </div>
+          <div class="doc-actions">
+            <button class="meta-action-btn" id="copy-page-link-btn" title="Copy link to clipboard">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              </svg>
+              <span>Copy Link</span>
+            </button>
+            <a class="meta-action-btn" id="view-github-btn" target="_blank" rel="noopener noreferrer">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+              <span>Edit on GitHub</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Rendered Markdown Article -->
+        <article class="markdown-body" id="content">
+          <div style="padding: 40px 0; color: var(--text-muted); display:flex; align-items:center; gap: 12px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="animation: spin 1s linear infinite;">
+              <line x1="12" y1="2" x2="12" y2="6"></line>
+              <line x1="12" y1="18" x2="12" y2="22"></line>
+              <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+              <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
+              <line x1="2" y1="12" x2="6" y2="12"></line>
+              <line x1="18" y1="12" x2="22" y2="12"></line>
+              <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
+              <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+            </svg>
+            <span>Loading documentation...</span>
+          </div>
+          <style>@keyframes spin { 100% { transform: rotate(360deg); } }</style>
+        </article>
+
+        <!-- Previous / Next Pagination -->
+        <nav class="doc-pagination" id="doc-pagination" aria-label="Document pagination"></nav>
+
+        <!-- Footer -->
+        <footer class="doc-footer">
+          <div>
+            Software Project Engineering & AI-Agent Development Standard · v1.1
+          </div>
+          <div>
+            Scaffold v4.1 · <a href="https://github.com/dev-reymark/engineering-guidelines" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </footer>
+
+      </div>
+    </main>
+
+    <!-- Right Sidebar (On This Page Table of Contents) -->
+    <aside class="toc-sidebar" id="toc-sidebar">
+      <div class="toc-title">On This Page</div>
+      <nav class="toc-nav" id="toc-nav"></nav>
+      <div class="toc-footer">
+        <a href="#progress-bar" class="toc-action-link" id="back-to-top">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+          </svg>
+          <span>Back to top</span>
+        </a>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Search Modal -->
+  <div class="search-modal-backdrop" id="search-modal-backdrop">
+    <div class="search-modal" role="dialog" aria-modal="true" aria-label="Search Documentation">
+      <div class="modal-search-header">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-muted)">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" class="modal-search-input" id="modal-search-input" placeholder="Type to search documentation..." autocomplete="off">
+        <button class="search-kbd" id="search-modal-close" style="cursor:pointer">ESC</button>
+      </div>
+      <div class="modal-search-results" id="modal-search-results">
+        <div style="padding: 24px; text-align: center; color: var(--text-muted); font-size: 13.5px;">
+          Search across 70+ documents, rules, workflows, and guidelines.
+        </div>
+      </div>
+      <div class="modal-search-footer">
+        <span>Use <span class="search-kbd">↑</span> <span class="search-kbd">↓</span> to navigate</span>
+        <span>Press <span class="search-kbd">ENTER</span> to select</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="doc-toast" id="doc-toast">Link copied to clipboard!</div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+  <script>
+    // State & DOM Elements
+    let NAV = [];
+    let flattenedNav = [];
+    const GITHUB_REPO_URL = 'https://github.com/dev-reymark/engineering-guidelines';
+
+    const navContainer = document.getElementById('nav-container');
+    const contentEl = document.getElementById('content');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const themeBtn = document.getElementById('theme-btn');
+    const themeIconSun = document.getElementById('theme-icon-sun');
+    const themeIconMoon = document.getElementById('theme-icon-moon');
+    const progressBar = document.getElementById('progress-bar');
+    const tocNav = document.getElementById('toc-nav');
+    const breadcrumbsEl = document.getElementById('breadcrumbs');
+    const docPaginationEl = document.getElementById('doc-pagination');
+    const readingTimeEl = document.getElementById('reading-time');
+    const wordCountEl = document.getElementById('word-count');
+    const viewGithubBtn = document.getElementById('view-github-btn');
+    const copyPageLinkBtn = document.getElementById('copy-page-link-btn');
+    const docToast = document.getElementById('doc-toast');
+
+    // Search modal elements
+    const searchTrigger = document.getElementById('search-trigger');
+    const searchModalBackdrop = document.getElementById('search-modal-backdrop');
+    const modalSearchInput = document.getElementById('modal-search-input');
+    const modalSearchResults = document.getElementById('modal-search-results');
+    const searchModalClose = document.getElementById('search-modal-close');
+    const sidebarFilter = document.getElementById('sidebar-filter');
+    const filterClear = document.getElementById('filter-clear');
+
+    // Theme Management (Default Light)
+    function initTheme() {
+      const savedTheme = localStorage.getItem('engineering_theme') || 'light';
+      setTheme(savedTheme);
+    }
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('engineering_theme', theme);
+      if (theme === 'dark') {
+        themeIconSun.style.display = 'none';
+        themeIconMoon.style.display = 'block';
+      } else {
+        themeIconSun.style.display = 'block';
+        themeIconMoon.style.display = 'none';
+      }
+    }
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+    initTheme();
+
+    // Utility: HTML Escaping
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+
+    // Current Document Path Resolution
+    function currentDocPath() {
+      const raw = location.hash.replace(/^#\/?/, '').trim();
+      if (!raw || raw === '') return 'README.md';
+      return decodeURIComponent(raw);
+    }
+
+    // Toast Trigger
+    function showToast(msg) {
+      docToast.textContent = msg;
+      docToast.classList.add('show');
+      setTimeout(() => docToast.classList.remove('show'), 2400);
+    }
+
+    // Scroll Progress
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement;
+      const winScroll = h.scrollTop || document.body.scrollTop;
+      const height = h.scrollHeight - h.clientHeight;
+      const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+      progressBar.style.width = scrolled + '%';
+    });
+
+    // Render Navigation Sidebar
+    function renderSidebar(filter = '') {
+      const q = filter.trim().toLowerCase();
+      let html = '';
+      let matchCount = 0;
+
+      for (let gIndex = 0; gIndex < NAV.length; gIndex++) {
+        const group = NAV[gIndex];
+        const matchingItems = group.items.filter(item => {
+          if (!q) return true;
+          return item.title.toLowerCase().includes(q) || item.path.toLowerCase().includes(q);
+        });
+
+        if (!matchingItems.length) continue;
+        matchCount += matchingItems.length;
+
+        const isCollapsed = false; // keep open or expanded when filtering
+        html += `
+          <div class="sidebar-group ${isCollapsed ? 'collapsed' : ''}" data-group-index="${gIndex}">
+            <div class="group-header" onclick="toggleGroup(${gIndex})">
+              <span class="group-title-wrap">
+                <svg class="group-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+                <span>${esc(group.group)}</span>
+              </span>
+              <span class="group-count">${matchingItems.length}</span>
+            </div>
+            <div class="group-items">
+        `;
+
+        for (const item of matchingItems) {
+          html += `
+            <a class="nav-item-link" data-path="${esc(item.path)}" href="#/${encodeURI(item.path)}">
+              <span>${esc(item.title)}</span>
+            </a>
+          `;
+        }
+
+        html += `
+            </div>
+          </div>
+        `;
+      }
+
+      if (matchCount === 0 && q) {
+        html = `<div style="padding:16px 8px; color:var(--text-muted); font-size:13px;">No documents match "${esc(filter)}"</div>`;
+      }
+
+      navContainer.innerHTML = html;
+      highlightActiveNav();
+    }
+
+    function toggleGroup(index) {
+      const el = document.querySelector(`.sidebar-group[data-group-index="${index}"]`);
+      if (el) el.classList.toggle('collapsed');
+    }
+
+    function highlightActiveNav() {
+      const current = currentDocPath();
+      document.querySelectorAll('.nav-item-link').forEach(a => {
+        const isActive = a.dataset.path === current;
+        a.classList.toggle('active', isActive);
+        if (isActive) {
+          // Ensure parent group is open
+          const group = a.closest('.sidebar-group');
+          if (group) group.classList.remove('collapsed');
+        }
+      });
+    }
+
+    // Build Table of Contents & Enhance Rendered HTML
+    function buildTOCAndEnhanceContent() {
+      const headings = contentEl.querySelectorAll('h2, h3');
+      let tocHtml = '';
+
+      headings.forEach((heading, idx) => {
+        const text = heading.textContent.trim();
+        const id = 'heading-' + idx + '-' + text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        heading.id = id;
+
+        // Add clickable anchor link
+        const anchor = document.createElement('a');
+        anchor.className = 'heading-anchor';
+        anchor.href = '#' + id;
+        anchor.innerHTML = '#';
+        anchor.setAttribute('aria-hidden', 'true');
+        anchor.onclick = (e) => {
+          e.preventDefault();
+          heading.scrollIntoView({ behavior: 'smooth' });
+          history.replaceState(null, null, '#/' + currentDocPath() + '#' + id);
+        };
+        heading.appendChild(anchor);
+
+        const depthClass = heading.tagName.toLowerCase() === 'h3' ? 'depth-3' : 'depth-2';
+        tocHtml += `<a class="toc-link ${depthClass}" href="#${id}" data-id="${id}">${esc(text)}</a>`;
+      });
+
+      if (!tocHtml) {
+        tocHtml = '<span style="color:var(--text-subtle); font-size:12px;">No subheadings in this document.</span>';
+      }
+      tocNav.innerHTML = tocHtml;
+
+      // Click handling for TOC links
+      tocNav.querySelectorAll('.toc-link').forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          const targetId = link.getAttribute('data-id');
+          const targetEl = document.getElementById(targetId);
+          if (targetEl) {
+            targetEl.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+
+      // Enhance Code Blocks with Language Bar & Copy Button
+      contentEl.querySelectorAll('pre').forEach(pre => {
+        const code = pre.querySelector('code');
+        const langMatch = code?.className.match(/language-(\w+)/);
+        const lang = langMatch ? langMatch[1] : 'code';
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'code-block-wrapper';
+
+        const header = document.createElement('div');
+        header.className = 'code-block-header';
+        header.innerHTML = `
+          <span class="code-lang-tag">${esc(lang)}</span>
+          <button class="code-copy-btn" type="button">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span>Copy</span>
+          </button>
+        `;
+
+        const copyBtn = header.querySelector('.code-copy-btn');
+        copyBtn.addEventListener('click', async () => {
+          const textToCopy = code ? code.innerText : pre.innerText;
+          try {
+            await navigator.clipboard.writeText(textToCopy);
+            copyBtn.innerHTML = `
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span style="color:#10b981; font-weight:600">Copied!</span>
+            `;
+            setTimeout(() => {
+              copyBtn.innerHTML = `
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>Copy</span>
+              `;
+            }, 2000);
+          } catch (err) {
+            showToast('Failed to copy');
+          }
+        });
+
+        pre.parentNode.insertBefore(wrapper, pre);
+        wrapper.appendChild(header);
+        wrapper.appendChild(pre);
+      });
+
+      // Wrap Tables in Responsive Containers
+      contentEl.querySelectorAll('table').forEach(table => {
+        if (!table.parentElement.classList.contains('table-container')) {
+          const container = document.createElement('div');
+          container.className = 'table-container';
+          table.parentNode.insertBefore(container, table);
+          container.appendChild(table);
+        }
+      });
+
+      // Process GitHub-style Callouts / Admonitions: > [!NOTE], > [!TIP], etc.
+      contentEl.querySelectorAll('blockquote').forEach(bq => {
+        const text = bq.textContent.trim();
+        const match = text.match(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/i);
+        if (match) {
+          const type = match[1].toUpperCase();
+          const icons = {
+            NOTE: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>`,
+            TIP: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"></path></svg>`,
+            IMPORTANT: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>`,
+            WARNING: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>`,
+            CAUTION: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><octagon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></octagon><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>`
+          };
+          
+          const admonition = document.createElement('div');
+          admonition.className = `admonition admonition-${type.toLowerCase()}`;
+          
+          let innerHtml = bq.innerHTML.replace(/\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\](?:\s*<br\s*\/?>)?/i, '').trim();
+          admonition.innerHTML = `
+            <div class="admonition-header">
+              ${icons[type] || ''}
+              <span>${type}</span>
+            </div>
+            <div class="admonition-content">${innerHtml}</div>
+          `;
+          bq.parentNode.replaceChild(admonition, bq);
+        }
+      });
+
+      // Intercept Relative Markdown Links inside article so SPA doesn't break
+      contentEl.querySelectorAll('a').forEach(a => {
+        const href = a.getAttribute('href');
+        if (href && !href.startsWith('http://') && !href.startsWith('https://') && !href.startsWith('#') && !href.startsWith('mailto:')) {
+          if (href.endsWith('.md') || href.includes('.md#')) {
+            a.addEventListener('click', e => {
+              e.preventDefault();
+              const currentPath = currentDocPath();
+              const currentDir = currentPath.includes('/') ? currentPath.substring(0, currentPath.lastIndexOf('/')) : '';
+              
+              let [targetFile, hash] = href.split('#');
+              let resolved;
+              if (targetFile.startsWith('/')) {
+                resolved = targetFile.replace(/^\/+/, '');
+              } else {
+                resolved = currentDir ? currentDir + '/' + targetFile : targetFile;
+              }
+              
+              // Normalize ./ and ../
+              const parts = resolved.split('/');
+              const stack = [];
+              for (const p of parts) {
+                if (p === '.' || !p) continue;
+                if (p === '..') {
+                  stack.pop();
+                } else {
+                  stack.push(p);
+                }
+              }
+              const finalPath = stack.join('/');
+              location.hash = '#/' + finalPath + (hash ? '#' + hash : '');
+            });
+          }
+        }
+      });
+
+      // Run Prism code highlighting
+      if (window.Prism) {
+        Prism.highlightAllUnder(contentEl);
+      }
+    }
+
+    // Scroll-Spy for TOC
+    window.addEventListener('scroll', () => {
+      const headings = Array.from(contentEl.querySelectorAll('h2, h3'));
+      if (!headings.length) return;
+
+      const scrollPos = window.scrollY + 100;
+      let currentActiveId = null;
+
+      for (let i = 0; i < headings.length; i++) {
+        if (headings[i].offsetTop <= scrollPos) {
+          currentActiveId = headings[i].id;
+        } else {
+          break;
+        }
+      }
+
+      if (!currentActiveId && headings.length) currentActiveId = headings[0].id;
+
+      tocNav.querySelectorAll('.toc-link').forEach(link => {
+        link.classList.toggle('active', link.getAttribute('data-id') === currentActiveId);
+      });
+    });
+
+    // Render Breadcrumbs, Pagination, and Metadata
+    function updateMetadataAndPagination(docPath, rawMarkdown) {
+      // Find current item in flattened NAV
+      const currentIndex = flattenedNav.findIndex(i => i.path === docPath);
+      const currentItem = currentIndex >= 0 ? flattenedNav[currentIndex] : null;
+
+      // Breadcrumbs
+      let breadcrumbHtml = `<a href="#/README.md">Guidelines</a>`;
+      if (currentItem) {
+        breadcrumbHtml += ` <span class="breadcrumb-sep">/</span> <span>${esc(currentItem.group)}</span>`;
+        breadcrumbHtml += ` <span class="breadcrumb-sep">/</span> <span class="breadcrumb-current">${esc(currentItem.title)}</span>`;
+      } else {
+        const parts = docPath.split('/');
+        breadcrumbHtml += ` <span class="breadcrumb-sep">/</span> <span class="breadcrumb-current">${esc(parts[parts.length - 1])}</span>`;
+      }
+      breadcrumbsEl.innerHTML = breadcrumbHtml;
+
+      // Stats
+      const words = rawMarkdown.trim().split(/\s+/).filter(Boolean).length;
+      const readMinutes = Math.max(1, Math.round(words / 200));
+      readingTimeEl.innerHTML = `
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+        <span>~${readMinutes} min read</span>
+      `;
+      wordCountEl.textContent = `${words.toLocaleString()} words`;
+
+      // GitHub link
+      viewGithubBtn.href = `${GITHUB_REPO_URL}/blob/main/content/${docPath}`;
+
+      // Pagination Cards
+      let paginationHtml = '';
+      if (currentIndex > 0) {
+        const prev = flattenedNav[currentIndex - 1];
+        paginationHtml += `
+          <a href="#/${encodeURI(prev.path)}" class="pagination-card prev">
+            <span class="pagination-label">← Previous</span>
+            <span class="pagination-title">${esc(prev.title)}</span>
+          </a>
+        `;
+      } else {
+        paginationHtml += `<div></div>`;
+      }
+
+      if (currentIndex >= 0 && currentIndex < flattenedNav.length - 1) {
+        const next = flattenedNav[currentIndex + 1];
+        paginationHtml += `
+          <a href="#/${encodeURI(next.path)}" class="pagination-card next">
+            <span class="pagination-label">Next →</span>
+            <span class="pagination-title">${esc(next.title)}</span>
+          </a>
+        `;
+      }
+
+      docPaginationEl.innerHTML = paginationHtml;
+    }
+
+    // Load and Render Document
+    async function loadDocument() {
+      const docPath = currentDocPath();
+      highlightActiveNav();
+      closeMobileSidebar();
+
+      try {
+        const response = await fetch('content/' + docPath);
+        if (!response.ok) {
+          throw new Error(`File "content/${docPath}" could not be retrieved (${response.status} ${response.statusText})`);
+        }
+        const markdown = await response.text();
+
+        marked.setOptions({
+          gfm: true,
+          breaks: false,
+          headerIds: true
+        });
+
+        const rawHtml = marked.parse(markdown);
+        contentEl.innerHTML = DOMPurify.sanitize(rawHtml);
+
+        const pageTitle = contentEl.querySelector('h1')?.textContent || 'Engineering Guidelines';
+        document.title = `${pageTitle} · Engineering Guidelines v1.1`;
+
+        updateMetadataAndPagination(docPath, markdown);
+        buildTOCAndEnhanceContent();
+
+        // Check if there was an in-page anchor
+        const hashParts = location.hash.split('#');
+        if (hashParts.length > 2) {
+          const anchorId = hashParts[2];
+          setTimeout(() => {
+            const target = document.getElementById(anchorId);
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        } else {
+          window.scrollTo(0, 0);
+        }
+
+      } catch (err) {
+        contentEl.innerHTML = `
+          <div class="doc-error-card">
+            <div class="doc-error-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+            </div>
+            <h2 style="border:none; margin:0 0 10px; font-size:1.4rem;">Document Not Found</h2>
+            <p style="color:var(--text-muted); max-width:480px; margin:0 auto 16px;">
+              The requested path <code>content/${esc(docPath)}</code> could not be loaded. It may have moved or been renamed.
+            </p>
+            <div class="doc-error-actions">
+              <a href="#/README.md" class="btn-primary">Go to Overview</a>
+              <a href="#/docs/ENGINEERING-STANDARD.md" class="btn-secondary">Engineering Standard</a>
+            </div>
+          </div>
+        `;
+        document.title = 'Document Unavailable · Engineering Guidelines';
+        tocNav.innerHTML = '<span style="color:var(--text-subtle); font-size:12px;">No outline available.</span>';
+        breadcrumbsEl.innerHTML = `<a href="#/README.md">Guidelines</a> <span class="breadcrumb-sep">/</span> <span class="breadcrumb-current">Error</span>`;
+        docPaginationEl.innerHTML = '';
+      }
+    }
+
+    // Copy Page Link Button
+    copyPageLinkBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        showToast('Page link copied to clipboard!');
+      } catch (e) {
+        showToast('Failed to copy link');
+      }
+    });
+
+    // Mobile Sidebar Drawer
+    function openMobileSidebar() {
+      sidebar.classList.add('open');
+      sidebarOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMobileSidebar() {
+      sidebar.classList.remove('open');
+      sidebarOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    mobileMenuBtn.addEventListener('click', () => {
+      if (sidebar.classList.contains('open')) closeMobileSidebar();
+      else openMobileSidebar();
+    });
+    sidebarOverlay.addEventListener('click', closeMobileSidebar);
+
+    // Sidebar Live Filter
+    sidebarFilter.addEventListener('input', e => {
+      const val = e.target.value;
+      filterClear.classList.toggle('visible', !!val);
+      renderSidebar(val);
+    });
+    filterClear.addEventListener('click', () => {
+      sidebarFilter.value = '';
+      filterClear.classList.remove('visible');
+      renderSidebar('');
+      sidebarFilter.focus();
+    });
+
+    // Search Modal Implementation (Ctrl + K)
+    function openSearchModal() {
+      searchModalBackdrop.classList.add('open');
+      modalSearchInput.value = '';
+      renderModalResults('');
+      setTimeout(() => modalSearchInput.focus(), 50);
+      document.body.style.overflow = 'hidden';
+    }
+    function closeSearchModal() {
+      searchModalBackdrop.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    searchTrigger.addEventListener('click', openSearchModal);
+    searchModalClose.addEventListener('click', closeSearchModal);
+    searchModalBackdrop.addEventListener('click', e => {
+      if (e.target === searchModalBackdrop) closeSearchModal();
+    });
+
+    window.addEventListener('keydown', e => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        if (searchModalBackdrop.classList.contains('open')) closeSearchModal();
+        else openSearchModal();
+      }
+      if (e.key === 'Escape' && searchModalBackdrop.classList.contains('open')) {
+        closeSearchModal();
+      }
+    });
+
+    function renderModalResults(q) {
+      const query = q.trim().toLowerCase();
+      if (!query) {
+        modalSearchResults.innerHTML = `
+          <div style="padding: 24px; text-align: center; color: var(--text-muted); font-size: 13.5px;">
+            Type a keyword to search standard, architecture, agent workflows, and rules.
+          </div>
+        `;
+        return;
+      }
+
+      const results = flattenedNav.filter(item => 
+        item.title.toLowerCase().includes(query) || 
+        item.group.toLowerCase().includes(query) || 
+        item.path.toLowerCase().includes(query)
+      ).slice(0, 10);
+
+      if (!results.length) {
+        modalSearchResults.innerHTML = `
+          <div style="padding: 28px; text-align: center; color: var(--text-muted); font-size: 13.5px;">
+            No documents found matching <strong>"${esc(q)}"</strong>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+      results.forEach((item, idx) => {
+        html += `
+          <a href="#/${encodeURI(item.path)}" class="search-result-item ${idx === 0 ? 'selected' : ''}" onclick="closeSearchModal()">
+            <span class="search-result-title">${esc(item.title)}</span>
+            <span class="search-result-group">${esc(item.group)} · <code style="font-size:11px">${esc(item.path)}</code></span>
+          </a>
+        `;
+      });
+      modalSearchResults.innerHTML = html;
+    }
+
+    modalSearchInput.addEventListener('input', e => renderModalResults(e.target.value));
+    modalSearchInput.addEventListener('keydown', e => {
+      const items = Array.from(modalSearchResults.querySelectorAll('.search-result-item'));
+      if (!items.length) return;
+      const activeIdx = items.findIndex(el => el.classList.contains('selected'));
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        const next = (activeIdx + 1) % items.length;
+        items.forEach(el => el.classList.remove('selected'));
+        items[next].classList.add('selected');
+        items[next].scrollIntoView({ block: 'nearest' });
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        const prev = (activeIdx - 1 + items.length) % items.length;
+        items.forEach(el => el.classList.remove('selected'));
+        items[prev].classList.add('selected');
+        items[prev].scrollIntoView({ block: 'nearest' });
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        if (activeIdx >= 0) {
+          items[activeIdx].click();
+        }
+      }
+    });
+
+    // Hashchange Listener
+    window.addEventListener('hashchange', loadDocument);
+
+    // Initial Load: Fetch nav.json, Flatten Items, and Load First Document
+    fetch('nav.json')
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to load nav.json');
+        return res.json();
+      })
+      .then(data => {
+        NAV = data;
+        flattenedNav = [];
+        for (const g of NAV) {
+          for (const item of g.items) {
+            flattenedNav.push({ ...item, group: g.group });
+          }
+        }
+        renderSidebar();
+        loadDocument();
+      })
+      .catch(err => {
+        contentEl.innerHTML = `
+          <div class="doc-error-card">
+            <h2>Navigation Index Error</h2>
+            <p style="color:var(--text-muted)">Could not load <code>nav.json</code>. Please verify the file exists and is valid JSON.</p>
+          </div>
+        `;
+      });
+  </script>
+</body>
+</html>
